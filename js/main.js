@@ -1,122 +1,149 @@
 /* ---- mixitup.js our work sorting ---- */
 $('#thework').mixItUp({
-    animation: {
-		duration: 1000
-    }
+  animation: {
+    duration: 1000,
+  },
 });
 
 /* ---- gallery ---- */
 $('#gallery').magnificPopup({
-    delegate: 'a.zoom',
-    type: 'image',
-    fixedContentPos: false,
-    removalDelay: 300,
-    mainClass: 'mfp-fade',
-    gallery: {
-        enabled: true,
-        preload: [0,2]
-    }
+  delegate: 'a.zoom',
+  type: 'image',
+  fixedContentPos: false,
+  removalDelay: 300,
+  mainClass: 'mfp-fade',
+  gallery: {
+    enabled: true,
+    preload: [0, 2],
+  },
 });
 
 /* ---- popup image ---- */
 $('.popup-img').magnificPopup({
-    type: 'image',
-    removalDelay: 300,
-    mainClass: 'mfp-fade'
+  type: 'image',
+  removalDelay: 300,
+  mainClass: 'mfp-fade',
 });
 
 /* ---- popup video ---- */
 $(document).ready(function() {
-    $('.popup-youtube, .popup-vimeo, .popup-gmaps').magnificPopup({
-        disableOn: 700,
-        type: 'iframe',
-        mainClass: 'mfp-fade',
-        removalDelay: 160,
-        preloader: false,
-        fixedContentPos: false
-    });
+  $('.popup-youtube, .popup-vimeo, .popup-gmaps').magnificPopup({
+    disableOn: 700,
+    type: 'iframe',
+    mainClass: 'mfp-fade',
+    removalDelay: 160,
+    preloader: false,
+    fixedContentPos: false,
+  });
 });
 
 /* ---- nav smooth scroll ---- */
 $(document).ready(function() {
-    $('.scroll-link').on('click', function(event){
-        event.preventDefault();
-        var sectionID = $(this).attr("data-id");
-        scrollToID('#' + sectionID, 750);
-    });
-    $('.scroll-top').on('click', function(event) {
-        event.preventDefault();
-        $('html, body').animate({scrollTop:0}, 1200);       
-    });
+  $('.scroll-link').on('click', function(event) {
+    var sectionID = $(this).attr('href');
+    if (sectionID.indexOf('#') !== 0) {
+      return;
+    }
+    event.preventDefault();
+    scrollToID(sectionID, 750);
+  });
+  $('.scroll-top').on('click', function(event) {
+    event.preventDefault();
+    $('html, body').animate({scrollTop: 0}, 1200);
+  });
 });
 
 /* ---- navbar offset ---- */
-function scrollToID(id, speed){
-    var offSet = 50;
-    var targetOffset = $(id).offset().top - offSet;
-    $('html,body').animate({scrollTop:targetOffset}, speed);
+function scrollToID(id, speed) {
+  var offSet = 50;
+  var targetOffset = $(id).offset().top - offSet;
+  $('html,body').animate({scrollTop: targetOffset}, speed);
 }
 
 /* ---- animations ---- */
 if (typeof sr == 'undefined') {
-    window.sr = ScrollReveal({
-        duration: 1500,
-        delay: 50
-    });
+  window.sr = ScrollReveal({
+    duration: 1500,
+    delay: 50,
+  });
 }
 Royal_Preloader.config({
-    onComplete: function () {
-        triggerReveals();
-    }
+  onComplete: function() {
+    triggerReveals();
+  },
 });
+
 function triggerReveals() {
-    sr.reveal('.bottomReveal', {
-        origin: 'bottom'
-    }).reveal('.leftReveal', {
-        origin: 'left'
-    }).reveal('.rightReveal', {
-        origin: 'right'
-    }).reveal('.topReveal', {
-        origin: 'top'
-    });
+  sr.reveal('.bottomReveal', {
+    origin: 'bottom',
+  }).reveal('.leftReveal', {
+    origin: 'left',
+  }).reveal('.rightReveal', {
+    origin: 'right',
+  }).reveal('.topReveal', {
+    origin: 'top',
+  });
 
-    sr.reveal('.rotateBottomReveal', {
-        origin: 'bottom',
-        rotate: { x: 90 }
-    }).reveal('.rotateLeftReveal', {
-        origin: 'left',
-        rotate: { x: 90 }
-    }).reveal('.rotateRightReveal', {
-        origin: 'right',
-        rotate: { x: 90 }
-    }).reveal('.rotateTopReveal', {
-        origin: 'top',
-        rotate: { x: 90 }
-    })
+  sr.reveal('.rotateBottomReveal', {
+    origin: 'bottom',
+    rotate: {x: 90},
+  }).reveal('.rotateLeftReveal', {
+    origin: 'left',
+    rotate: {x: 90},
+  }).reveal('.rotateRightReveal', {
+    origin: 'right',
+    rotate: {x: 90},
+  }).reveal('.rotateTopReveal', {
+    origin: 'top',
+    rotate: {x: 90},
+  });
 
-    sr.reveal('.scaleReveal', {
-        origin: 'top',
-        scale: 0.6
-    });
+  sr.reveal('.scaleReveal', {
+    origin: 'top',
+    scale: 0.6,
+  });
 }
 
 /* ---- close mobile nav on click ---- */
-$(document).on('click','.navbar-collapse.in',function(e) {
-    if( $(e.target).is('a') && $(e.target).attr('class') != 'dropdown-toggle' ) {
-        $(this).collapse('hide');
-    }
+$(document).on('click', '.navbar-collapse.in', function(e) {
+  if ($(e.target).is('a') && $(e.target).attr('class') != 'dropdown-toggle') {
+    $(this).collapse('hide');
+  }
 });
 
 /* ---- rotater text ---- */
-var current = 1; 
-var height = jQuery('.ticker').height(); 
-var numberDivs = jQuery('.ticker').children().length; 
-var first = jQuery('.ticker h1:nth-child(1)'); 
+var current = 1;
+var height = jQuery('.ticker').height();
+var numberDivs = jQuery('.ticker').children().length;
+var first = jQuery('.ticker h1:nth-child(1)');
 setInterval(function() {
-    var number = current * -height;
-    first.css('margin-top', number + 'px');
-    if (current === numberDivs) {
-        first.css('margin-top', '0px');
-        current = 1;
-    } else current++;
+  var number = current * -height;
+  first.css('margin-top', number + 'px');
+  if (current === numberDivs) {
+    first.css('margin-top', '0px');
+    current = 1;
+  } else current++;
 }, 2500);
+
+/* ---- Testimonial ---- */
+$('#facebook-testimonials').owlCarousel({
+  loop: true,
+  center: true,
+  items: 3,
+  margin: 0,
+  autoplay: true,
+  dots: true,
+  autoplayTimeout: 8500,
+  smartSpeed: 450,
+  responsive: {
+    0: {
+      items: 1,
+    },
+    768: {
+      items: 2,
+    },
+    1170: {
+      items: 3,
+    },
+  },
+});
